@@ -4,7 +4,7 @@ import { hash } from "bcryptjs"
 const prisma = new PrismaClient()
 
 async function main() {
-  // Create blood inventory entries
+  
   const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
   
   for (const bloodType of bloodTypes) {
