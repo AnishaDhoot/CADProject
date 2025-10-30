@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Palette: 3F2A52, 75619D, BEAEDB, E6EFF7, 3A2D34 */
+  --purple-deep: #3F2A52;
+  --purple: #75619D;
+  --purple-soft: #BEAEDB;
+  --ice: #E6EFF7;
+  --ink: #3A2D34;
+}
+
+
+:root {
+  /* Light theme – Purples */
+  --background: var(--ice);
+  --foreground: var(--ink);
+  --card: #FFFFFF;
+  --card-foreground: var(--ink);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--ink);
+
+  --primary: var(--purple);
+  --primary-foreground: var(--ice);
+
+  --secondary: var(--purple-soft);
+  --secondary-foreground: var(--ink);
+
+  --muted: var(--purple-soft);
+  --muted-foreground: var(--ink);
+
+  --accent: var(--purple-soft);
+  --accent-foreground: var(--ink);
+
+  --destructive: #D32F2F;
+  --destructive-foreground: #FFFFFF;
+
+  --border: var(--purple-soft);
+  --input: var(--purple-soft);
+  --ring: var(--purple);
+
+  --chart-1: var(--purple);
+  --chart-2: var(--purple-soft);
+  --chart-3: var(--purple-deep);
+  --chart-4: var(--ice);
+  --chart-5: var(--ink);
+
+  --radius: 0.625rem;
+
+  --sidebar: var(--ice);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--purple);
+  --sidebar-primary-foreground: var(--ice);
+  --sidebar-accent: var(--purple-soft);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--purple-soft);
+  --sidebar-ring: var(--purple);
+}
+
+.dark {
+  /* Dark theme – Purples */
+  --background: var(--ink);
+  --foreground: var(--ice);
+  --card: #1E1E1E;
+  --card-foreground: var(--ice);
+  --popover: #1E1E1E;
+  --popover-foreground: var(--ice);
+
+  --primary: var(--purple);
+  --primary-foreground: var(--ice);
+
+  --secondary: var(--purple-deep);
+  --secondary-foreground: var(--ice);
+
+  --muted: #2A2A2A;
+  --muted-foreground: var(--ice);
+
+  --accent: var(--purple-soft);
+  --accent-foreground: var(--ink);
+
+  --destructive: #D32F2F;
+  --destructive-foreground: #FFFFFF;
+
+  --border: var(--purple-deep);
+  --input: var(--purple-deep);
+  --ring: var(--purple);
+
+  --chart-1: var(--purple);
+  --chart-2: var(--purple-soft);
+  --chart-3: var(--purple-deep);
+  --chart-4: var(--ice);
+  --chart-5: var(--ink);
+
+  --sidebar: #1E1E1E;
+  --sidebar-foreground: var(--ice);
+  --sidebar-primary: var(--purple);
+  --sidebar-primary-foreground: var(--ice);
+  --sidebar-accent: var(--purple-deep);
+  --sidebar-accent-foreground: var(--ice);
+  --sidebar-border: #2A2A2A;
+  --sidebar-ring: var(--purple);
+}

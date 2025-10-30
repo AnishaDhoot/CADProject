@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String
+  role      UserRole   @default(DONOR)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  // Relations
+  donor     Donor?
+  hospital  Hospital?
+  requests  BloodRequest[]
+  donations Donation[]
+
+  @@index([email])
+}
+
+enum UserRole {
+  DONOR
+  HOSPITAL
+  ADMIN
+}
+
+model Donor {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  bloodType       String   // A+, A-, B+, B-, AB+, AB-, O+, O-
+  age             Int
+  weight          Int      // in kg
+  lastDonationDate DateTime?
+  totalDonations  Int      @default(0)
+  isEligible      Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  donations Donation[]
+
+  @@index([bloodType])
+  @@index([userId])
+}
+
+model Hospital {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  name      String
+  address   String
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requests BloodRequest[]
+
+  @@index([userId])
+}
+
+model BloodInventory {
+  id        String   @id @default(cuid())
+  bloodType String   @unique // A+, A-, B+, B-, AB+, AB-, O+, O-
+  quantity  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bloodType])
+}
+
+model Donation {
+  id        String   @id @default(cuid())
+  donorId   String
+  userId    String
+  quantity  Int      // in ml
+  bloodType String
+  status    DonationStatus @default(COMPLETED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  donor User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  donorProfile Donor @relation(fields: [donorId], references: [id], onDelete: Cascade)
+
+  @@index([donorId])
+  @@index([userId])
+  @@index([bloodType])
+}
+
+enum DonationStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+model BloodRequest {
+  id        String   @id @default(cuid())
+  hospitalId String
+  userId    String
+  bloodType String
+  quantity  Int      // in ml
+  status    RequestStatus @default(PENDING)
+  reason    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  hospital Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([hospitalId])
+  @@index([userId])
+  @@index([status])
+  @@index([bloodType])
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
