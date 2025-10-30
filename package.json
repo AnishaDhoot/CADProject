@@ -7,11 +7,13 @@
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "latest",
