@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/lib/auth-context"
+// import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
@@ -27,7 +27,7 @@ interface BloodInventory {
 
 export default function HospitalDashboard() {
   const router = useRouter()
-  const { user, loading } = useAuth()
+  // const { user, loading } = useAuth()
   const [hospital, setHospital] = useState<HospitalProfile | null>(null)
   const [stats, setStats] = useState<RequestStats>({ pending: 0, approved: 0, completed: 0 })
   const [inventory, setInventory] = useState<BloodInventory[]>([])
