@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    // "build": "prisma generate && next build",
     "build": "node amplify-build-preparation.js && next build",
     "dev": "next dev",
     "lint": "eslint .",
